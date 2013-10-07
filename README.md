@@ -1,2 +1,3 @@
-TLP-Qt
+Reproducto Multimedia 
 ======
+Curso Qt 
