@@ -19,7 +19,7 @@ MainWindow::MainWindow(QWidget *parent) :
     btnPause_     = new QToolButton(this);
     btnStop_      = new QToolButton(this);
 
-    //Configure widwgets
+    //Setup widwgets
     videoWidget_->setMinimumSize(400, 400);
     mediaPlayer_->setVideoOutput(videoWidget_);
     mediaPlayer_->setVolume(100);
@@ -35,6 +35,12 @@ MainWindow::MainWindow(QWidget *parent) :
     lytMain_->addWidget(btnPause_,     2, 2, 1, 1);
     lytMain_->addWidget(btnStop_,      2, 3, 1, 1);
     lytMain_->addWidget(volumeSlider_, 2, 4, 1, 1);
+
+    //Buttons icons
+    btnOpen_->setIcon(QIcon(QPixmap(":/icons/resources/eject.png")));
+    btnPause_->setIcon(QIcon(QPixmap(":/icons/resources/pause.png")));
+    btnPlay_->setIcon(QIcon(QPixmap(":/icons/resources/play.png")));
+    btnStop_->setIcon(QIcon(QPixmap(":/icons/resources/stop.png")));
 
     //Connections
     connect(btnOpen_,      SIGNAL(pressed()),               this,         SLOT(onOpen()));
@@ -55,8 +61,7 @@ MainWindow::~MainWindow()
 void MainWindow::onOpen()
 {
     //Show file open dialog
-    QString fileName;
-    fileName = QFileDialog::getOpenFileName(this,
+    QString fileName = QFileDialog::getOpenFileName(this,
                                             tr("Abrir archivo"));
     if (fileName != "") {
         mediaPlayer_->setMedia(QUrl::fromLocalFile(fileName));

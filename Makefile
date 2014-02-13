@@ -46,9 +46,11 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = reproductor/main.cpp \
-		reproductor/mainwindow.cpp moc_mainwindow.cpp
+		reproductor/mainwindow.cpp qrc_resources.cpp \
+		moc_mainwindow.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
+		qrc_resources.o \
 		moc_mainwindow.o
 DIST          = /usr/lib64/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib64/qt5/mkspecs/common/shell-unix.conf \
@@ -147,6 +149,7 @@ DIST          = /usr/lib64/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib64/qt5/mkspecs/features/yacc.prf \
 		/usr/lib64/qt5/mkspecs/features/lex.prf \
 		reproductor/reproductor/reproductor.pro \
+		reproductor/reproductor/resources.qrc \
 		reproductor/reproductor.pro
 QMAKE_TARGET  = reproductor-exe
 DESTDIR       = #avoid trailing-slash linebreak
@@ -278,6 +281,7 @@ Makefile: reproductor/reproductor.pro /usr/lib64/qt5/mkspecs/linux-g++-64/qmake.
 		/usr/lib64/qt5/mkspecs/features/yacc.prf \
 		/usr/lib64/qt5/mkspecs/features/lex.prf \
 		reproductor/reproductor.pro \
+		reproductor/resources.qrc \
 		/lib64/libQt5MultimediaWidgets.prl \
 		/lib64/libQt5Multimedia.prl \
 		/lib64/libQt5Widgets.prl \
@@ -383,6 +387,7 @@ Makefile: reproductor/reproductor.pro /usr/lib64/qt5/mkspecs/linux-g++-64/qmake.
 /usr/lib64/qt5/mkspecs/features/yacc.prf:
 /usr/lib64/qt5/mkspecs/features/lex.prf:
 reproductor/reproductor.pro:
+reproductor/resources.qrc:
 /lib64/libQt5MultimediaWidgets.prl:
 /lib64/libQt5Multimedia.prl:
 /lib64/libQt5Widgets.prl:
@@ -397,7 +402,7 @@ qmake_all: FORCE
 
 dist: 
 	@test -d .tmp/reproductor-exe1.0.0 || mkdir -p .tmp/reproductor-exe1.0.0
-	$(COPY_FILE) --parents $(SOURCES) $(DIST) .tmp/reproductor-exe1.0.0/ && $(COPY_FILE) --parents reproductor/mainwindow.h .tmp/reproductor-exe1.0.0/ && $(COPY_FILE) --parents reproductor/main.cpp reproductor/mainwindow.cpp .tmp/reproductor-exe1.0.0/ && (cd `dirname .tmp/reproductor-exe1.0.0` && $(TAR) reproductor-exe1.0.0.tar reproductor-exe1.0.0 && $(COMPRESS) reproductor-exe1.0.0.tar) && $(MOVE) `dirname .tmp/reproductor-exe1.0.0`/reproductor-exe1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/reproductor-exe1.0.0
+	$(COPY_FILE) --parents $(SOURCES) $(DIST) .tmp/reproductor-exe1.0.0/ && $(COPY_FILE) --parents reproductor/resources.qrc .tmp/reproductor-exe1.0.0/ && $(COPY_FILE) --parents reproductor/mainwindow.h .tmp/reproductor-exe1.0.0/ && $(COPY_FILE) --parents reproductor/main.cpp reproductor/mainwindow.cpp .tmp/reproductor-exe1.0.0/ && (cd `dirname .tmp/reproductor-exe1.0.0` && $(TAR) reproductor-exe1.0.0.tar reproductor-exe1.0.0 && $(COMPRESS) reproductor-exe1.0.0.tar) && $(MOVE) `dirname .tmp/reproductor-exe1.0.0`/reproductor-exe1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/reproductor-exe1.0.0
 
 
 clean:compiler_clean 
@@ -418,8 +423,16 @@ mocables: compiler_moc_header_make_all compiler_moc_source_make_all
 
 check: first
 
-compiler_rcc_make_all:
+compiler_rcc_make_all: qrc_resources.cpp
 compiler_rcc_clean:
+	-$(DEL_FILE) qrc_resources.cpp
+qrc_resources.cpp: reproductor/resources.qrc \
+		reproductor/resources/eject.png \
+		reproductor/resources/stop.png \
+		reproductor/resources/play.png \
+		reproductor/resources/pause.png
+	/usr/lib64/qt5/bin/rcc -name resources reproductor/resources.qrc -o qrc_resources.cpp
+
 compiler_moc_header_make_all: moc_mainwindow.cpp
 compiler_moc_header_clean:
 	-$(DEL_FILE) moc_mainwindow.cpp
@@ -585,7 +598,7 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_moc_header_clean 
+compiler_clean: compiler_rcc_clean compiler_moc_header_clean 
 
 ####### Compile
 
@@ -899,6 +912,9 @@ mainwindow.o: reproductor/mainwindow.cpp reproductor/mainwindow.h \
 		/usr/include/qt5/QtWidgets/qtoolbutton.h \
 		/usr/include/qt5/QtWidgets/qabstractbutton.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o reproductor/mainwindow.cpp
+
+qrc_resources.o: qrc_resources.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_resources.o qrc_resources.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp
