@@ -7,17 +7,13 @@
 QT       += core network xml multimedia multimediawidgets widgets
 
 
-TARGET = Qt-TLP
+TARGET = reproductor-exe
 TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp \
-    player.cpp \
-    controls.cpp
+        mainwindow.cpp
 
-HEADERS  += mainwindow.h \
-    player.h \
-    controls.h
+HEADERS  += mainwindow.h
 
 
