@@ -1,7 +1,7 @@
 Tercer proyecto - Reproductor Multimedia 
 ----
 
-En esta ocación veremos algunas de las capacidades multimedia de Qt5. Esta práctica permitirá reforzar los conocimientos adquiridos hasta ahora al tiempo que experimetamos con las caracteristicas multimedia de Qt5.
+En esta ocasión veremos algunas de las capacidades multimedia de Qt5. Esta práctica permitirá reforzar los conocimientos adquiridos hasta ahora al tiempo que experimentamos con las características multimedia de Qt5.
 
 Como mínimo, implementaremos las siguientes funcionalidades:
 
@@ -14,7 +14,7 @@ Modus operandi
 ----
 
 1. Hacer un Fork de este proyecto para usarlo como referencia.
-* Leer, probar y enteder el código propuesto.
+* Leer, probar y entender el código propuesto.
 * Modificar el código para adaptarlo al estilo de cada uno.
 * Estudiar la implementación de Qt para manejar sockets
 * Descanso de 15 minutos
@@ -26,22 +26,27 @@ Tareas propuestas para realizar en clase
 
 Se propone realizar las siguientes tareas:
 
-* Añadir menú "archivo" con opción para "abrir" un archivo
-* Añadir menú "ayuda" con opción "acerca de" (Heredar de QDialog)
-* Añadir menú "ver" con opción "pantalla completa"
-* Añadir soporte para cargar y mostrar listas de reproducción [M3U] y/o [PLS]
+* Añadir menú "Archivo" con opción para "Abrir" un archivo
+* Añadir menú "Ayuda" con opción "Acerca de" (Heredar de QDialog)
+* Añadir menú "Ver" con opción "Pantalla completa"
+* Añadir opción "Recientes" al menú "Archivo"
+* Añadir opción "Metadatos" en el menú "Ver"
 * Añadir soporte para reproducir fuentes de streaming
 
 Entrega
 ----
 
-Todo el trabajo realizado en clase y/o en casa, debe ser subido a [GitHub] y, para que podamos "corregirlo", tendrás que hacer un Pull Requests.
+Todo el trabajo realizado en clase y/o en casa, debe ser subido a [GitHub] y, para que podamos "corregirlo", tendrás que hacer un Pull Request.
 
 Para subir nota, proponemos las siguientes tareas para casa:
 
+* Añadir soporte para cargar y mostrar listas de reproducción [M3U] y/o [PLS]
+* Añadir funciones de reproducción en bucle, reproducción aleatoria
 * Implementar lo necesario para que el reproductor se minimize en la bandeja del sistema
 * Añadir menú contextual al icono de bandeja del sistema
-* Agregar menú "editar" con opción "imagen" que haga que aparezca un diálogo en el que se pueda modificar el brillo, constraste y saturación del vídeo
+* Agregar menú "editar" con opción "imagen", que haga que aparezca un diálogo en el que se pueda modificar el brillo, constraste y saturación del vídeo
+* Soporte para subtítulos Subrip(Srt)
+
 
 *Nota: Se valorará el simple hecho de haberlo intentado, no tiene que ser todo perfecto, lo importante es que aprendas a "buscarte la vida" con la documentación de QT al tiempo que practicas el desarrollo con este framework.* 
 
