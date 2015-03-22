@@ -5,4 +5,7 @@
         <file>resources/play.png</file>
         <file>resources/stop.png</file>
     </qresource>
+    <qresource prefix="/">
+        <file>recientes.txt</file>
+    </qresource>
 </RCC>
